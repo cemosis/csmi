@@ -1,0 +1,144 @@
+digraph csmi {
+	//size=",8";
+	node [fontsize=24, shape = plaintext];
+
+        node [style=filled,shape=box]
+        sysexp [label="Systèmes d'exploitation" fillcolor="0.559 0.354 0.941"];
+        langages [label="Langages" fillcolor="0.995 0.357 1.000 " shape=ellipse];
+        cpp [label="C++" fillcolor="0.559 0.354 0.941"];
+        python[label="Python" fillcolor="0.559 0.354 0.941"];
+        compilation[label="Compilation" fillcolor="0.559 0.354 0.941"];
+        database [label="Data" fillcolor="0.995 0.357 1.000 " shape=ellipse];
+        DB[label="Bases de données"  fillcolor="0.559 0.354 0.941"];
+        mongoDB[label="Traitement et stockage de données large échelle" fillcolor="0.559 0.354 0.941"];
+        reseaux[label="Réseaux" fillcolor="0.559 0.354 0.941"];
+        calculpar[ label="Calcul parallèle" fillcolor="0.559 0.354 0.941"];
+        edp[label="Équations aux dérivées partielles (EDP)" fillcolor="0.995 0.357 1.000 " shape=ellipse];
+        edp1[label="EDP1" fillcolor="0.241 0.412 1.000"];
+        edp2[label="EDP2" fillcolor="0.241 0.412 1.000"];
+        edp3[label="EDP3" fillcolor="0.241 0.412 1.000"];
+        signal[label="Traitement du signal (TS)" fillcolor="0.995 0.357 1.000 " shape=ellipse];
+        signal1[label="TS1" fillcolor="0.241 0.412 1.000"];
+        signal2[label="TS2" fillcolor="0.241 0.412 1.000"];
+        algo[label="Algorithmique" fillcolor="0.241 0.412 1.000"];
+        analfonc[label="Analyse Fonctionnelle" fillcolor="0.241 0.412 1.000"];
+        inverse[label="Problèmes inverses" fillcolor="0.995 0.357 1.000 "];
+        incertitudes[label="Incertitudes" fillcolor="0.241 0.412 1.000"];
+        control [label="Contrôle optimal" fillcolor="0.241 0.412 1.000"];
+        optimisation [label="Optimisation" fillcolor="0.241 0.412 1.000"];
+        calcsci[label="Calcul Scientifique" fillcolor="0.995 0.357 1.000 " shape=ellipse];
+        calcsci1 [label="Calcul scientifique 1" fillcolor="0.241 0.412 1.000"];
+        calcsci2 [label="Calcul scientifique 2" fillcolor="0.241 0.412 1.000"];
+        graphe[label="Graphes" fillcolor="0.995 0.357 1.000 " shape=ellipse];
+        graph1 [label="Graphe 1" fillcolor="0.241 0.412 1.000"];
+        graph2 [label="Graphe 2" fillcolor="0.559 0.354 0.941"];
+        
+        sysexp -> langages;
+        langages -> cpp;
+        langages -> python;
+        langages -> compilation;
+        sysexp -> calculpar;
+        sysexp -> reseaux;reseaux->database;
+        sysexp -> database;
+        database -> DB;
+        database -> mongoDB;
+        DB -> mongoDB;
+
+        cpp -> calcsci2;
+        python -> incertitudes;
+        cpp -> incertitudes;
+
+        inverse->optimisation->control;
+        
+        
+        cpp -> edp;
+        edp -> edp1;
+        edp -> edp2;
+        edp -> edp3;
+        edp1 -> edp2->edp3;
+
+        cpp -> signal;
+        signal->signal1;
+        signal->signal2;
+        signal1 -> signal2;
+        edp -> signal2;
+        edp -> incertitudes;
+        calcsci1->edp;
+        calcsci1->signal;
+        calcsci2 -> incertitudes;
+        edp2->calcsci2;
+        analfonc -> edp;
+        edp -> control;
+        calculpar -> calcsci2;
+        calculpar -> edp2, edp3;
+        optimisation->incertitudes;
+        calcsci -> calcsci1 -> calcsci2;
+        calcsci -> calcsci2;
+        algo -> langages;
+        algo -> edp;
+        algo -> reseaux;
+        algo -> calculpar;
+        algo -> signal;
+        graphe -> graph1;
+        graphe -> graph2;
+        graph1 -> graph2;
+        graph2 -> calcsci2;
+        graph2 -> edp;
+        graph2 -> signal;
+        graph2 -> database;
+
+        calcsci2 -> mongoDB [style=dashed label="can use" fontsize=20];
+        calcsci2 -> compilation [style=dashed label="can use" fontsize=20];
+/*        systexp
+	1972 -> 1976;
+	1976 -> 1978;
+	1978 -> 1980;
+	1980 -> 1982;
+	1982 -> 1984;
+	1984 -> 1986;
+	1986 -> 1988;
+	1988 -> 1990;
+	1990 -> future;
+
+	node [fontsize=20, shape = box];
+	{ rank=same;  1976 Mashey Bourne; }
+	{ rank=same;  1978 Formshell csh; }
+	{ rank=same;  1980 esh vsh; }
+	{ rank=same;  1982 ksh "System-V"; }
+	{ rank=same;  1984 v9sh tcsh; }
+	{ rank=same;  1986 "ksh-i"; }
+	{ rank=same;  1988 KornShell Perl rc; }
+	{ rank=same;  1990 tcl Bash; }
+	{ rank=same;  "future" POSIX "ksh-POSIX"; }
+
+	Thompson -> Mashey;
+	Thompson -> Bourne;
+	Thompson -> csh;
+	csh -> tcsh;
+	Bourne -> ksh;
+	Bourne -> esh;
+	Bourne -> vsh;
+	Bourne -> "System-V";
+	Bourne -> v9sh;
+	v9sh -> rc;
+	Bourne -> Bash;
+	"ksh-i" -> Bash;
+	KornShell -> Bash;
+	esh -> ksh;
+	vsh -> ksh;
+	Formshell -> ksh;
+	csh -> ksh;
+	KornShell -> POSIX;
+	"System-V" -> POSIX;
+	ksh -> "ksh-i";
+	"ksh-i" -> KornShell;
+	KornShell -> "ksh-POSIX";
+	Bourne -> Formshell;
+
+	edge [style=invis];
+	1984 -> v9sh -> tcsh ;
+	1988 -> rc -> KornShell;
+	Formshell -> csh;
+        KornShell -> Perl;
+        */
+}
